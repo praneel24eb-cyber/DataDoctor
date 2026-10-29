@@ -1,0 +1,33 @@
+vision:
+  backbone_A:
+    id: dinov2_vits14
+    model_name: facebook/dinov2-small
+    dim: 384
+    batch_size: 128
+  backbone_B:
+    id: clip_vitb32
+    model_name: openai/clip-vit-base-patch32
+    dim: 512
+    batch_size: 128
+  backbone_C:
+    id: resnet50_tv
+    model_name: torchvision/resnet50
+    dim: 2048
+    batch_size: 128
+
+text:
+  backbone_A:
+    id: minilm_l6
+    model_name: sentence-transformers/all-MiniLM-L6-v2
+    dim: 384
+    batch_size: 256
+  backbone_B:
+    id: bge_small
+    model_name: BAAI/bge-small-en-v1.5
+    dim: 384
+    batch_size: 256
+  backbone_C:
+    id: tfidf_svd384
+    dim: 384
+    max_features: 20000
+

@@ -1,0 +1,24 @@
+default_provider: groq
+budget_cap_fraction: 0.02   # B = 400 calls max on AG News 20k
+min_confidence_to_relabel: 0.60
+
+providers:
+  groq:
+    model_id: "llama-3.3-70b-versatile"
+    temperature: 0.0
+    max_rpm: 28             # Free-tier safe rate limit (requests per minute)
+    virtual_cost_per_1m_input_tokens: 0.59
+    virtual_cost_per_1m_output_tokens: 0.79
+  gemini:
+    model_id: "gemini-2.5-flash"
+    temperature: 0.0
+    max_rpm: 14
+    virtual_cost_per_1m_input_tokens: 0.15
+    virtual_cost_per_1m_output_tokens: 0.60
+  mock:
+    model_id: "deterministic-mock-v1"
+    temperature: 0.0
+    max_rpm: 100000
+    virtual_cost_per_1m_input_tokens: 0.0
+    virtual_cost_per_1m_output_tokens: 0.0
+

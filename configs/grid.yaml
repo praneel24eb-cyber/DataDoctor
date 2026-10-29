@@ -1,0 +1,40 @@
+project: datadoctor_benchmark
+random_seeds: [42, 43, 44, 45, 46]
+
+datasets:
+  ag_news:
+    modality: text
+    subsample_train: 20000
+    backbone_A: minilm_l6
+    backbone_B: bge_small
+    backbone_C: tfidf_svd384
+    run_llm_judge: true
+  cifar10:
+    modality: vision
+    subsample_train: null   # Full 50,000 train / 10,000 test
+    backbone_A: dinov2_vits14
+    backbone_B: clip_vitb32
+    backbone_C: resnet50_tv
+    run_llm_judge: false
+
+synthetic_grid:
+  noise_types: ["symmetric", "asymmetric", "idn"]
+  noise_rates: [0.10, 0.20, 0.40]   # For CIFAR-10 asymmetric, source_eta = [0.10, 0.20, 0.40] -> global_eta = [0.05, 0.10, 0.20]
+  # Total synthetic cells = 2 datasets * 3 noise_types * 3 noise_rates * 5 seeds = 90 cells
+
+real_noise_grid:
+  dataset: cifar10n
+  label_sets: ["aggre_label", "random_label1", "worse_label"]
+  cv_seeds: [42, 43, 44, 45, 46]
+  # Total real-noise cells = 3 label_sets * 5 seeds = 15 cells
+
+detectors:
+  knn_k_default: 15
+  knn_k_ablations: [5, 10, 15, 25, 50]
+  rrf_k_default: 60
+  rrf_k_ablations: [1, 10, 60, 600]
+
+budget_curve:
+  budgets: [0.01, 0.02, 0.05, 0.10, 0.20]
+  repair_modes: ["oracle_relabel", "remove", "ensemble_argmax_relabel", "llm_relabel"]
+
