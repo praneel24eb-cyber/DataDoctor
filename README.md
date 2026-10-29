@@ -25,7 +25,7 @@ Individual label-error signals—such as out-of-fold self-confidence, $k$-NN lab
 **DataDoctor’s contribution lies in:**
 1. **Parameter-Free Multi-View Fusion:** Combining parametric out-of-fold predictions with non-parametric geometric disagreement across independent foundation backbones via unsupervised **Reciprocal Rank Fusion (RRF)**.
 2. **Noise-Adaptive Disagreement Routing:** Dynamically adjusting suspicion thresholds based on the Confident Joint noise estimate ($\hat{\eta}$), selectively routing high-uncertainty text instances where the model view ($V_1$) and geometric view ($V_2$) disagree to an LLM Judge under a strict review-budget constraint.
-3. **Unconfounded Review-Budget Benchmarking:** Retraining classifiers under realistic review budgets $b \in \{1\%, 2\%, 5\%, 10\%, 20\%\}$ to rigorously measure test-accuracy recovery, explicitly contrasting LLM relabelling against zero-cost classifier ensemble relabelling (`ensemble_argmax_relabel`).
+3. **Unconfounded Review-Budget Benchmarking:** Retraining classifiers under realistic review budgets $b \in \{0.01, 0.02, 0.05, 0.10, 0.20\}$ (i.e., 1%, 2%, 5%, 10%, 20%) to rigorously measure test-accuracy recovery, explicitly contrasting LLM relabelling against zero-cost classifier ensemble relabelling (`ensemble_argmax_relabel`).
 
 ### Disclosed Limitations
 * **Natural Baseline Noise & Pretraining Contamination:** Clean AG News already contains an estimated $3\text{--}5\%$ natural label noise. Additionally, modern commercial LLMs may have encountered AG News during pretraining; we quantify this effect via clean test-set zero-shot benchmarking.
